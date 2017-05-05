@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'https://supermarket.getchef.com/api/v1'
+
+cookbook 'apt'
+cookbook 'fail2ban'
+cookbook 'hostnames'
+cookbook 'memcached'
+cookbook 'chef_nginx', '~> 6.0.2'
+cookbook 'redis',         git: "https://github.com/phlipper/chef-redis.git"
+cookbook 'ruby_build'
+cookbook 'ruby_rbenv', '~> 1.2.0'
+cookbook 'ssh-hardening'
+cookbook 'sudo'
+cookbook 'packages', '~> 1.0.0'
+cookbook 'mysql'

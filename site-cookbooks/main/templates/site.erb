@@ -1,0 +1,14 @@
+server {
+  listen       80;
+  server_name  <%= node.set_fqdn %>;
+
+  root /var/www/<%= node.app.name %>/current/public;
+  client_max_body_size 128M;
+  passenger_enabled on;
+  rails_env production;
+
+  location ~ ^/(assets|images|javascripts|stylesheets|system)/ {
+    expires max;
+    add_header Cache-Control public;
+  }
+}

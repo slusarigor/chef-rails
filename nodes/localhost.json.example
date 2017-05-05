@@ -1,0 +1,97 @@
+{
+  // This is the list of the recipes that are going to be cooked.
+  "run_list": [
+    "recipe[apt]",
+    "recipe[apt::default]",
+    "recipe[sudo]",
+    "recipe[packages::default]",
+    "recipe[hostnames]",
+    "recipe[ssh-hardening]",
+    "recipe[chef_nginx::default]",
+    "recipe[chef_nginx::passenger]",
+    "recipe[main::nginx]",
+    "recipe[ruby_build]",
+    "recipe[ruby_rbenv::system]",
+    "recipe[ruby_rbenv::user]",
+    "recipe[redis::server]",
+    "recipe[memcached]",
+    "recipe[fail2ban]",
+    "recipe[main::mysql]"
+  ],
+  "automatic": {
+    "ipaddress": "<ip-address>"
+  },
+
+  // Add additional tools
+  "packages-cookbook": [
+    "git",
+    "imagemagick",
+    "htop",
+    "mc"
+  ],
+
+  // Nginx default values configuration.
+  // Also you can specify your default site configuration.
+  "nginx": {
+    "user"                : "<user-name>",
+    "client_max_body_size": "2m",
+    "worker_processes"    : "auto",
+    "worker_connections"  : 768,
+    "repository"          : "ppa",
+    "daemon_disable"      : false,
+    "default_site_enabled": false,
+    "repo_source": "passenger",
+    "package_name": "nginx-extras",
+    "passenger": {
+       "install_method": "package"
+    }
+  },
+
+  // You must define who’s going to be the user(s) you’re going to use for deploy.
+  "authorization": {
+    "sudo": {
+      "groups": [
+        "sudo",
+        "admin"
+      ],
+      "users": [
+        "<user-name>"
+      ],
+      "passwordless": true
+    }
+  },
+
+  "app": {
+     "name": "<app-name>"
+  },
+
+  // Set hostname
+  "set_fqdn": "<hostname>",
+
+  // Install ruby
+  "rbenv": {
+    "user_installs": [
+      {
+        "user": "<user-name>",
+        "rubies": [
+          "<ruby-version>"
+        ],
+        "global"  : "<ruby-version>",
+        "gems": {
+          "<ruby-version>": [
+            {
+              "name": "bundle"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  // Fail2ban configuration to protect our server against SSH attack attempts
+  "fail2ban": {
+    "bantime": 600,
+    "maxretry": 3,
+    "backend": "auto"
+  }
+}
