@@ -6,7 +6,7 @@ Kitchen to setup an Ubuntu 16.04 for Ruby on Rails stack:
 * Mysql
 * Redis
 * Ruby with RVM
-* Phusion Passenger Standalone
+* Phusion Passenger
 * ImageMagick
 * Git
 
